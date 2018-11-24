@@ -7,6 +7,10 @@
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
+.idea/**/modules.xml
+.idea/**/misc.xml
+.idea/**/IntelligentRaman.iml
+.idea/**/vcs.xml
 
 # Generated files
 .idea/**/contentModel.xml
