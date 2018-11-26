@@ -1,0 +1,46 @@
+import os
+import glob
+import numpy as np
+from scipy import io
+import matplotlib.pyplot as plt
+import pandas as pd
+
+data = pd.read_csv('datasets/train.csv.bz2')
+
+y_df = data[['molecule', 'concentration']]
+X_df = data.drop(['molecule', 'concentration'], axis=1)
+spectra = X_df['spectra'].values
+spectra = np.array([np.array(dd[1:-1].split(',')).astype(float) for dd in spectra])
+X_df['spectra'] = spectra.tolist()
+
+# print("X_df:", X_df, "y_df:", y_df)
+
+freqs = pd.read_csv('datasets/freq.csv')
+freqs = freqs['freqs'].values
+
+print(np.unique(y_df['molecule'].values))
+
+molecule = y_df['molecule'].values
+
+concentration = y_df['concentration'].values
+
+plt.plot(freqs, spectra.T)
+plt.xlabel('Freq')
+plt.ylabel('Intensity')
+
+plt.hist(concentration, bins=26)
+plt.xlabel('Concentration')
+print('There are %s different values of concentrations.' % np.unique(concentration).size)
+# plt.show()
+
+for mol in np.unique(molecule):
+    plt.figure()
+    plt.hist(concentration[molecule == mol], bins=20)
+    plt.title((mol + "- %s values of concentrations.")
+              % np.unique(concentration[molecule == mol]).size)
+    print(np.unique(concentration[molecule == mol]))
+
+print('Number of samples: %s' % len(y_df))
+y_df.groupby('molecule').count().plot(
+    y='concentration', kind='pie', autopct='%.2f', figsize=(5, 5))
+# plt.show()
