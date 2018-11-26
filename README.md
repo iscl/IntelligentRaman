@@ -1,1 +1,0 @@
-This is a new project for Raman substance recognition using intelligent algorithm!
