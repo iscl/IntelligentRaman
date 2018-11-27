@@ -1,3 +1,4 @@
+# coding=gbk
 # import numpy as np
 # import matplotlib.pyplot as plt
 # from mpl_toolkits.mplot3d import Axes3D
@@ -40,37 +41,29 @@
 # ax = Axes3D(fig, rect=[0, 0, 1, 1], elev=40, azim=20)
 # plt.scatter(X[:, 0], X[:, 1], X[:, 2], marker='o')
 # plt.show()
-import numpy as np
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
-#matplotlib inline
-from sklearn.datasets.samples_generator import make_blobs
+
 import numpy as np
 import pandas as pd
-import csv
-import cv2
-import sys
-import datetime
 
-Cholesterol_read_path = r'F:\datasets\deal_data\Cholesterol\all.csv'
+Cholesterol_read_path = '/datasets/deal_data/Cholesterol/all.csv'
 Cholesterol_csvRead = pd.read_csv(Cholesterol_read_path, header=None, index_col=False)
-Hemoglobin_read_path = r'F:\datasets\deal_data\Hemoglobin\all.csv'
+Hemoglobin_read_path = '/datasets/deal_data/Hemoglobin/all.csv'
 Hemoglobin_csvRead = pd.read_csv(Hemoglobin_read_path, header=None, index_col=False)
-Triglyceride_read_path = r'F:\datasets\deal_data\Triglyceride\all.csv'
+Triglyceride_read_path = '/datasets/deal_data/Triglyceride/all.csv'
 Triglyceride_csvRead = pd.read_csv(Triglyceride_read_path, header=None, index_col=False)
 print(Triglyceride_csvRead.shape)
 
-# À­Âü²¨Êý¼ÇÂ¼#
+# À­Âü²¨Êý¼ÇÂ¼
 Ramanshift = np.array(Triglyceride_csvRead[[0][0]])
 Ramanshift_data = pd.DataFrame(Ramanshift)
 Ramanshift_data.to_csv(r'F:\Ramanshift.csv', header=False, index=False)
 
-# ¸ÊÓÍÈýõ¥¼ÇÂ¼#
-row_number = Triglyceride_csvRead.shape[1]
-Triglyceride_label = np.ones((row_number, 1), dtype=np.int16)
+# ¸ÊÓÍÈýõ¥¼ÇÂ¼
+row_number1 =13000 #Triglyceride_csvRead.shape[1]
+Triglyceride_label = np.ones((row_number1, 1), dtype=np.int16)
 str_array=",".join(map(str, np.array(Triglyceride_csvRead[[1][0]])))
 Ramandata1 = np.array(str_array)
-for i in range(2, row_number+1):
+for i in range(2, row_number1+1):
     str_array = ",".join(map(str, np.array(Triglyceride_csvRead[[i][0]])))
     b = np.array(str_array)
     Ramandata1 = np.append(Ramandata1, b)
@@ -78,12 +71,12 @@ Ramandata1 = Ramandata1[:, np.newaxis]
 Ramandata1 = np.append(Ramandata1, Triglyceride_label, axis=1)
 print('Ramandata1.shape:\n', Ramandata1.shape)
 
-# Ñªºìµ°°×¼ÇÂ¼#
-row_number = Hemoglobin_csvRead.shape[1]
-Hemoglobin_label = 2*np.ones((row_number, 1), dtype=np.int16)
+# Ñªºìµ°°×¼ÇÂ¼
+row_number2 = 13000#Hemoglobin_csvRead.shape[1]
+Hemoglobin_label = 2*np.ones((row_number2, 1), dtype=np.int16)
 str_array = ",".join(map(str, np.array(Hemoglobin_csvRead[[1][0]])))
 Ramandata2 = np.array(str_array)
-for i in range(2, row_number+1):
+for i in range(2, row_number2+1):
     str_array = ",".join(map(str, np.array(Hemoglobin_csvRead[[i][0]])))
     b = np.array(str_array)
     Ramandata2 = np.append(Ramandata2, b)
@@ -91,12 +84,12 @@ Ramandata2 = Ramandata2[:, np.newaxis]
 Ramandata2 = np.append(Ramandata2, Hemoglobin_label, axis=1)
 print('Ramandata2.shape:\n', Ramandata2.shape)
 
-# µ¨¹Ì´¼¼ÇÂ¼#
-row_number = Cholesterol_csvRead.shape[1]
-Cholesterol_label = 3*np.ones((row_number, 1), dtype=np.int16)
+# µ¨¹Ì´¼¼ÇÂ¼
+row_number3 =13000# Cholesterol_csvRead.shape[1]
+Cholesterol_label = 3*np.ones((row_number3, 1), dtype=np.int16)
 str_array = ",".join(map(str, np.array(Cholesterol_csvRead[[1][0]])))
 Ramandata3 = np.array(str_array)
-for i in range(2, row_number+1):
+for i in range(2, row_number3+1):
     str_array = ",".join(map(str, np.array(Cholesterol_csvRead[[i][0]])))
     b = np.array(str_array)
     Ramandata3 = np.append(Ramandata3, b)
@@ -104,11 +97,11 @@ Ramandata3 = Ramandata3[:, np.newaxis]
 Ramandata3 = np.append(Ramandata3, Cholesterol_label, axis=1)
 print('Ramandata3.shape:\n', Ramandata3.shape)
 
-# ×éºÏ#
+# ×éºÏ
 Ramandata = np.vstack((Ramandata1, Ramandata2))
 Ramandata = np.vstack((Ramandata, Ramandata3))
 print('Ramandata.shape:\n', Ramandata.shape)
 
-# ¼ÇÂ¼#
-Ramanshift_data = pd.DataFrame(Ramandata)
-Ramanshift_data.to_csv(r'F:\Wavenumber.csv', header=False, index=False)
+# ¼ÇÂ¼
+Ramanshift_data = pd.DataFrame(Ramandata, columns=['Intensity ', 'label'])
+Ramanshift_data.to_csv(r'F:\Wavenumber.csv', index=False)
