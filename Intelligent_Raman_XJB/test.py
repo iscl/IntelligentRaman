@@ -56,7 +56,7 @@ print(Triglyceride_csvRead.shape)
 # 拉曼波数记录
 Ramanshift = np.array(Triglyceride_csvRead[[0][0]])
 Ramanshift_data = pd.DataFrame(Ramanshift)
-Ramanshift_data.to_csv(r'F:\Ramanshift.csv', header=False, index=False)
+Ramanshift_data.to_csv(r'F:\Ramanshift1.csv', header=False, index=False)
 
 # 甘油三酯记录
 row_number1 =13000 #Triglyceride_csvRead.shape[1]
@@ -104,4 +104,4 @@ print('Ramandata.shape:\n', Ramandata.shape)
 
 # 记录
 Ramanshift_data = pd.DataFrame(Ramandata, columns=['Intensity ', 'label'])
-Ramanshift_data.to_csv(r'F:\Wavenumber.csv', index=False)
+Ramanshift_data.to_csv(r'F:\Wavenumber1.csv', index=False)
