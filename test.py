@@ -69,8 +69,9 @@ print(cm)
 precision = precision_score(y_test, svm_pred, average=None)
 recall = recall_score(y_test, svm_pred, average=None)
 F1 = f1_score(y_test, svm_pred, average=None)
-fpr, tpr, thresholds = roc_curve(y_test, svm_prpbas[:, 1], pos_label='A')
-tnr = 1-fpr
+fpr, tpr, thresholds = roc_curve(y_test, svm_prpbas[:, 0], pos_label='A')
+tnr = 1-tpr
+
 print(tnr.shape)
 print('precision_score:', precision, '\n', 'recall_score:', recall, '\n',
       'recall_score:', F1, '\n', 'Sensitivity:', fpr, '\n', 'Specificity:', tnr)
