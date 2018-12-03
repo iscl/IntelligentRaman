@@ -1,11 +1,12 @@
+# coding=gbk
 import os
 import os.path
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-# ä¿¡å·å¤„ç†åº“ #
+# ĞÅºÅ´¦Àí¿â #
 import scipy.signal as sp
-# è‡ªå»ºåº“ #
+# ×Ô½¨¿â #
 import load_data
 import preprocessing_data as ppd
 import rampy
@@ -13,36 +14,34 @@ import rampy
 
 if __name__ == "__main__":
     print('main function')
-    path = "./datasets/20181123_AXBJC/axb_data/4"
-    Ramanshift, Intensity, base_Intensity = ppd.preprocess(path, 1, 600, 4000)
-    save = pd.DataFrame(Intensity)
-    save.to_csv('./assets/background.csv', index=False, header=False)
+    path = r"F:\datasets\20181128_ABZZJC_surgery\cancer_tissue\position3"
+    Ramanshift, Intensity, base_Intensity = ppd.preprocess(path, 1, 824, 932)
+    # save = pd.DataFrame(Intensity)
+    # save.to_csv('./assets/background.csv', index=False, header=False)
 
-    # Tri
-    # Hem
-    # Cho
-    # ç»˜å›¾ #
-    # æ§åˆ¶å›¾å½¢çš„é•¿å’Œå®½å•ä½ä¸ºè‹±å¯¸ï¼Œ
-    # è°ƒç”¨figureåˆ›å»ºä¸€ä¸ªç»˜å›¾å¯¹è±¡ï¼Œå¹¶ä¸”ä½¿å®ƒæˆä¸ºå½“å‰çš„ç»˜å›¾å¯¹è±¡ã€‚
+
+    # »æÍ¼ #
+    # ¿ØÖÆÍ¼ĞÎµÄ³¤ºÍ¿íµ¥Î»ÎªÓ¢´ç£¬
+    # µ÷ÓÃfigure´´½¨Ò»¸ö»æÍ¼¶ÔÏó£¬²¢ÇÒÊ¹Ëü³ÉÎªµ±Ç°µÄ»æÍ¼¶ÔÏó¡£
     plt.figure(num=1, figsize=(8, 4))
-    # å¯ä»¥è®©å­—ä½“å˜å¾—è·Ÿå¥½çœ‹
-    # ç»™æ‰€ç»˜åˆ¶çš„æ›²çº¿ä¸€ä¸ªåå­—ï¼Œæ­¤åå­—åœ¨å›¾ç¤º(legend)ä¸­æ˜¾ç¤ºã€‚
-    # åªè¦åœ¨å­—ç¬¦ä¸²å‰åæ·»åŠ "$"ç¬¦å·ï¼Œmatplotlibå°±ä¼šä½¿ç”¨å…¶å†…åµŒçš„latexå¼•æ“ç»˜åˆ¶çš„æ•°å­¦å…¬å¼ã€‚
-    # color : æŒ‡å®šæ›²çº¿çš„é¢œè‰²
-    # linewidth : æŒ‡å®šæ›²çº¿çš„å®½åº¦
+    # ¿ÉÒÔÈÃ×ÖÌå±äµÃ¸úºÃ¿´
+    # ¸øËù»æÖÆµÄÇúÏßÒ»¸öÃû×Ö£¬´ËÃû×ÖÔÚÍ¼Ê¾(legend)ÖĞÏÔÊ¾¡£
+    # Ö»ÒªÔÚ×Ö·û´®Ç°ºóÌí¼Ó"$"·ûºÅ£¬matplotlib¾Í»áÊ¹ÓÃÆäÄÚÇ¶µÄlatexÒıÇæ»æÖÆµÄÊıÑ§¹«Ê½¡£
+    # color : Ö¸¶¨ÇúÏßµÄÑÕÉ«
+    # linewidth : Ö¸¶¨ÇúÏßµÄ¿í¶È
     # plt.plot(Ramanshift, base_Intensity, label="$Tri$", color="blue", linewidth=1)
     plt.plot(Ramanshift, Intensity, label="$Tri$", color="blue", linewidth=1)
-    # è®¾ç½®Xè½´çš„æ–‡å­—
+    # ÉèÖÃXÖáµÄÎÄ×Ö
     plt.xlabel("Raman shift/cm-1")
-    # è®¾ç½®Yè½´çš„æ–‡å­—
+    # ÉèÖÃYÖáµÄÎÄ×Ö
     plt.ylabel("Intensity")
-    # è®¾ç½®å›¾è¡¨çš„æ ‡é¢˜
+    # ÉèÖÃÍ¼±íµÄ±êÌâ
     plt.title("Raman spectrum")
-    # è®¾ç½®Yè½´çš„èŒƒå›´
+    # ÉèÖÃYÖáµÄ·¶Î§
     plt.ylim()
-    # æ˜¾ç¤ºå›¾ç¤º
+    # ÏÔÊ¾Í¼Ê¾
     plt.legend()
-    # æ˜¾ç¤ºå‡ºæˆ‘ä»¬åˆ›å»ºçš„æ‰€æœ‰ç»˜å›¾å¯¹è±¡ã€‚
+    # ÏÔÊ¾³öÎÒÃÇ´´½¨µÄËùÓĞ»æÍ¼¶ÔÏó¡£
     plt.show()
 
 
